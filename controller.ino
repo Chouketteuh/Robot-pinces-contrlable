@@ -23,35 +23,35 @@ void loop()
 {
   if(digitalRead(bouton_A) == LOW)
   {
-    Serial.println("PBA");
+    Serial.println("A");
   }
   if(digitalRead(bouton_B) == LOW)
   {
-    Serial.println("PBB");
+    Serial.println("B");
   }
   if(digitalRead(bouton_C) == LOW)
   {
-    Serial.println("PBC");
+    Serial.println("C");
   }
   if(digitalRead(bouton_D) == LOW)
   {
-    Serial.println("PBD");
+    Serial.println("D");
   }
   if(digitalRead(bouton_E) == LOW)
   {
-    Serial.println("PBE");
+    Serial.println("E");
   }
   if(digitalRead(bouton_F) == LOW)
   {
-    Serial.println("PBF");
+    Serial.println("F");
   }
   if(digitalRead(bouton_joystick) == LOW)
   {
-    Serial.println("PBJ");
+    Serial.println("J");
   }
   
-  Serial.print("PX");
+  Serial.print("X");
   Serial.println(analogRead(joystick_X));
-  Serial.print("PY");
+  Serial.print("Y");
   Serial.println(analogRead(joystick_Y));
 }
