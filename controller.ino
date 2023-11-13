@@ -54,4 +54,6 @@ void loop()
   Serial.println(analogRead(joystick_X));
   Serial.print("Y");
   Serial.println(analogRead(joystick_Y));
+
+  delay(50);
 }
