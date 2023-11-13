@@ -1,10 +1,12 @@
+#include <stdio.h>
+#include <string.h>
 #include <SoftwareSerial.h>
 
 //Attribution de noms aux PIN
 #define RX_PIN 8
 #define TX_PIN 9
 
-char Data[4];
+char Data[5], i, j;
 
 SoftwareSerial UART = SoftwareSerial(RX_PIN, TX_PIN); //Création du nouveau port serie
 
@@ -22,27 +24,22 @@ void loop()
 {
   if (UART.available() > 0) 
   {
-    for(int i=0;i<4;i++) //fois 4
-      {
-        Data[i] = UART.read();
-        Serial.print(Data[i]);
-      }
-    if (UART.read() == 'P')
+    for(i=0;i<5;i++) //fois 5
     {
-      
-      if (UART.read() == 'B')
-      {
-        
-      }
-      else if (UART.read() == 'X')
-      {
-        
-      }
-      else if (UART.read() == 'Y')
-      {
-        
-      }
+      Data[i] = 0;
     }
+    for(i=0;i<5;i++) //fois 5
+    {
+      Data[i] = UART.read();
+      j = (i + 1);
+      if(Data[i] == ('A' && 'B'&& 'C'&& 'D'&& 'E'&& 'F'&& 'J'&& 'X'&& 'Y')) break;
+    }
+    Serial.print("C'est: ");
+    for(i=0;i<j;i++) //fois j
+    {
+      Serial.print(Data[i]);
+    }
+    Serial.println("");
   }
-  delay(200);
+  delay(50);
 }
