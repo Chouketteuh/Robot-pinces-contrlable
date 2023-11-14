@@ -2,8 +2,20 @@
 #include <stdio.h>
 #include <Servo.h>
 
-int cmd;                    // Variable de stockage de la commande
-int ServoPin = 9;           // Servo PIN
+// Servo PIN
+#define ServoPin 9
+
+// Moteur Gauche PINs
+#define MG_1 *
+#define MG_2 * 
+#define MG_vit *
+
+// Moteur Droit PINs
+#define MD_1 *
+#define MD_2 * 
+#define MD_vit *
+
+int cmd;                    // Variable de stockage de la commande  
 int temps = 1500;           // Variable de l'inclinaison du servo - Valeur du milieu 1500
 int SRH = 2400, SRAH = 700; // Valeur de rotation max (horaire & anti-horaire)
 Servo ServoMoteur;          // Déclaration du ServoMoteur
@@ -33,7 +45,7 @@ void loop()
       Serial.print("Rotation max atteinte\n"); // Affiche que la valeur max est atteinte
     }
   }
-  else if(cmd == '1')      // Si la valeur lue du moniteur serie est égale à 0
+  else if(cmd == '1')      // Si la valeur lue du moniteur serie est égale à 1
   {
     if(temps < SRH)        // Si n'est pas à la valeur max horaire (2400)
     {
@@ -46,6 +58,42 @@ void loop()
     {
       Serial.print("Rotation max atteinte\n"); // Affiche que la valeur max est atteinte
     }
+  }
+  else if(cmd == '2')      // Si la valeur lue du moniteur serie est égale à 2
+  {
+    // Tourne vers l'avant roue gauche
+    digitalWrite(MG_1, HIGH); 
+    digitalWrite(MG_2, LOW);
+    
+    // Tourne vers l'avant roue droite
+    digitalWrite(MD_1, HIGH); 
+    digitalWrite(MD_2, LOW);
+    
+    Serial.print("Avant");
+  }
+  else if(cmd == '3')      // Si la valeur lue du moniteur serie est égale à 3
+  {
+    // Tourne vers l'arrière roue gauche
+    digitalWrite(MG_1, LOW); 
+    digitalWrite(MG_2, HIGH);
+
+    // Tourne vers l'arrière roue droite
+    digitalWrite(MD_1, LOW); 
+    digitalWrite(MD_2, HIGH);
+    
+    Serial.print("Arrière");
+  }
+  else if(cmd == '4')      // Si la valeur lue du moniteur serie est égale à 3
+  {
+    // Stoppe la roue gauche
+    digitalWrite(MG_1, HIGH); 
+    digitalWrite(MG_2, HIGH);
+
+    // Stoppe la roue droite
+    digitalWrite(MD_1, HIGH); 
+    digitalWrite(MD_2, HIGH);
+    
+    Serial.print("Stop");
   }
   //delay(300); // Attente de 300 millisecondes
 }
