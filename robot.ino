@@ -86,12 +86,12 @@ void loop()
   else if(cmd == '4')      // Si la valeur lue du moniteur serie est égale à 3
   {
     // Stoppe la roue gauche
-    digitalWrite(MG_1, HIGH); 
-    digitalWrite(MG_2, HIGH);
+    digitalWrite(MG_1, LOW); 
+    digitalWrite(MG_2, LOW);
 
     // Stoppe la roue droite
-    digitalWrite(MD_1, HIGH); 
-    digitalWrite(MD_2, HIGH);
+    digitalWrite(MD_1, LOW); 
+    digitalWrite(MD_2, LOW);
     
     Serial.print("Stop");
   }
