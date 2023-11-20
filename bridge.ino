@@ -6,8 +6,8 @@
 #define RX_PIN 8
 #define TX_PIN 9
 
-char i, j;
-char Data[6];
+char i;
+char Data[4];
 
 SoftwareSerial UART = SoftwareSerial(RX_PIN, TX_PIN); //Création du nouveau port serie
 
@@ -23,27 +23,41 @@ void setup()
 
 void loop()
 {
-  if (UART.available() > 0)
+  if (UART.available() > 0) 
   {
-    for(i=0;i<6;i++) //fois 6
+    for(i=0;i<4;i++) //fois 4
     {
       Data[i] = 0;
     }
-    for(i=0;i<6;i++)
+    Data[0] = UART.read();
+    if(Data[0] == 'X')
     {
-      Data[i] = UART.read();
-      j = (i+1);
-      if(Data[i] == ('A' && 'B' && 'C' && 'D' && 'E' && 'F' && 'J' && 'X' && 'Y')) break;
+      i = 0;
+      Serial.print("Data X: ");
+      do
+      {
+        Data[i] = UART.read();
+        Serial.print(Data[i]);
+        i = i+1;
+      }while((Serial.available() > 0) && (Data[i] != 'X') && (Data[i] != 'Y'));
     }
-    if(Data[i] == ('A' && 'B' && 'C' && 'D' && 'E' && 'F' && 'J' && 'X' && 'Y'))
+    if(Data[0] == 'Y')
+    {
+      i = 0;
+      Serial.print("Data Y: ");
+      while(Serial.available() > 0 && Data[i] != 'X' && Data[i] != 'Y');
+      {
+        Data[i] = UART.read();
+        Serial.print(Data[i]);
+        i = i+1;
+      }
+    }
+    if(Data[0] != 'X' || Data[0] != 'Y')
     {
       Serial.print("Data: ");
-      for(i=0;i<j;i++) //fois j
-      {
-        Serial.print(Data[i]);
-      }
-      Serial.println("");
+      Serial.print(Data[0]);
     }
+    Serial.println("");
+    delay(2);
   }
-  delay(10);
 }
