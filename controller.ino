@@ -7,7 +7,10 @@
 #define bouton_F 7
 #define bouton_joystick 8   
 #define joystick_X A0
-#define joystick_Y A1                           
+#define joystick_Y A1
+
+byte DataX;
+byte DataY;
 
 void setup()
 {
@@ -51,9 +54,12 @@ void loop()
   }
   
   Serial.print("X");
-  Serial.println(analogRead(joystick_X));
+  DataX = (analogRead(joystick_X)/4);
+  Serial.println(DataX);
+  
   Serial.print("Y");
-  Serial.println(analogRead(joystick_Y));
+  DataY = (analogRead(joystick_Y)/4);
+  Serial.println(DataY);
 
   delay(50);
 }
