@@ -23,41 +23,15 @@ void setup()
 
 void loop()
 {
-  if (UART.available() > 0) 
+  // check if data is available
+  if (Serial.available() > 0) 
   {
-    for(i=0;i<5;i++) //fois 5
-    {
-      Data[i] = 0;
-    }
-    Data[0] = UART.read();
-    if(Data[0] == 'X')
-    {
-      i = 0;
-      Serial.print("Data X: ");
-      do
-      {
-        Data[i] = UART.read();
-        Serial.print(Data[i]);
-        i = i+1;
-      }while((Serial.available() > 0) && (Data[i] != 'X') && (Data[i] != 'Y'));
-    }
-    if(Data[0] == 'Y')
-    {
-      i = 0;
-      Serial.print("Data Y: ");
-      while(Serial.available() > 0 && Data[i] != 'X' && Data[i] != 'Y');
-      {
-        Data[i] = UART.read();
-        Serial.print(Data[i]);
-        i = i+1;
-      }
-    }
-    if(Data[0] != 'X' || Data[0] != 'Y')
-    {
-      Serial.print("Data: ");
-      Serial.print(Data[0]);
-    }
-    Serial.println("");
-    delay(200);
+    // read the incoming bytes:
+    int rlen = Serial.readBytesUntil('\n', Data, 4);
+
+    // prints the received data
+    Serial.print("I received: ");
+    for(i = 0; i < rlen; i++)
+      Serial.print(Data[i]);
   }
 }
