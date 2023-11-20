@@ -26,38 +26,38 @@ void loop()
 {
   if(digitalRead(bouton_A) == LOW)
   {
-    Serial.println("A");
+    Serial.println('A');
   }
   if(digitalRead(bouton_B) == LOW)
   {
-    Serial.println("B");
+    Serial.println('B');
   }
   if(digitalRead(bouton_C) == LOW)
   {
-    Serial.println("C");
+    Serial.println('C');
   }
   if(digitalRead(bouton_D) == LOW)
   {
-    Serial.println("D");
+    Serial.println('D');
   }
   if(digitalRead(bouton_E) == LOW)
   {
-    Serial.println("E");
+    Serial.println('E');
   }
   if(digitalRead(bouton_F) == LOW)
   {
-    Serial.println("F");
+    Serial.println('F');
   }
   if(digitalRead(bouton_joystick) == LOW)
   {
-    Serial.println("J");
+    Serial.println('J');
   }
   
-  Serial.print("X");
+  Serial.print('X');
   DataX = (analogRead(joystick_X)/4);
   Serial.println(DataX);
   
-  Serial.print("Y");
+  Serial.print('Y');
   DataY = (analogRead(joystick_Y)/4);
   Serial.println(DataY);
 
