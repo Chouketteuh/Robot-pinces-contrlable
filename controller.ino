@@ -1,4 +1,4 @@
-// Déclaration des broches
+//Attribution de noms aux PIN
 #define bouton_A 2
 #define bouton_B 3
 #define bouton_C 4  
@@ -9,57 +9,57 @@
 #define joystick_X A0
 #define joystick_Y A1
 
-byte DataX;
-byte DataY;
+int DataX;
+int DataY;
 
 void setup()
 {
   for (int i=2; i <= 8; i++)
   {
-      pinMode(i, INPUT_PULLUP); // Déclaration des broches 2 à 8 en entrée avec une résistance de tirage
+    pinMode(i, INPUT_PULLUP); // Déclaration des broches 2 à 8 en entrée avec une résistance de tirage
   }
   
-  Serial.begin(9600); // Initialisation du moniteur série
+  Serial.begin(19200); // Initialisation du moniteur série
 }
 
 void loop()
 {
   if(digitalRead(bouton_A) == LOW)
   {
-    Serial.println('A');
+    Serial.write(0x41);
   }
-  if(digitalRead(bouton_B) == LOW)
+  else if(digitalRead(bouton_B) == LOW)
   {
-    Serial.println('B');
+    Serial.write(0x42);
   }
-  if(digitalRead(bouton_C) == LOW)
+  else if(digitalRead(bouton_C) == LOW)
   {
-    Serial.println('C');
+    Serial.write(0x43);
   }
-  if(digitalRead(bouton_D) == LOW)
+  else if(digitalRead(bouton_D) == LOW)
   {
-    Serial.println('D');
+    Serial.write(0x44);
   }
-  if(digitalRead(bouton_E) == LOW)
+  else if(digitalRead(bouton_E) == LOW)
   {
-    Serial.println('E');
+    Serial.write(0x45);
   }
-  if(digitalRead(bouton_F) == LOW)
+  else if(digitalRead(bouton_F) == LOW)
   {
-    Serial.println('F');
+    Serial.write(0x46);
   }
-  if(digitalRead(bouton_joystick) == LOW)
+  else if(digitalRead(bouton_joystick) == LOW)
   {
-    Serial.println('J');
+    Serial.write(0x4A);
   }
-  
-  Serial.print('X');
-  DataX = (analogRead(joystick_X)/4);
-  Serial.println(DataX);
-  
-  Serial.print('Y');
-  DataY = (analogRead(joystick_Y)/4);
-  Serial.println(DataY);
+  else
+  {
+    Serial.write(0x58); 
+    DataX = analogRead(joystick_X);
+    Serial.println(DataX);
 
-  delay(50);
+    Serial.write(0x59);
+    DataY = analogRead(joystick_Y);
+    Serial.println(DataY);
+  }
 }
