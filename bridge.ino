@@ -14,7 +14,7 @@ int DataX;
 int DataY;
 char Data;
 
-SoftwareSerial UART = SoftwareSerial(RX_PIN, TX_PIN); //Création du nouveau port serie
+SoftwareSerial UART = SoftwareSerial(RX_PIN, TX_PIN); // Création du nouveau port serie
 
 void setup()
 {
