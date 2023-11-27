@@ -5,7 +5,7 @@
 /*IIC*/
 #include <Wire.h>
 
-// Attribution de noms aux PIN
+// Attribution de noms aux PINs
 #define RX_PIN 8
 #define TX_PIN 9
 
