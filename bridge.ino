@@ -1,6 +1,8 @@
 // Bibliothèques
 #include <stdio.h>
+/*UART*/
 #include <SoftwareSerial.h>
+/*IIC*/
 #include <Wire.h>
 
 // Attribution de noms aux PIN
@@ -22,7 +24,7 @@ void setup()
 
   // Demarrage des ports serie + vitesse de transmission
   UART.begin(19200); 
-  Wire.begin(); // Bus I2C (Pas besoin d'adresse pour le maitre)
+  Wire.begin(); // Bus IIC (Pas besoin d'adresse pour le maitre)
   Serial.begin(9600);
 
   delay(2000);
