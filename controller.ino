@@ -1,4 +1,4 @@
-// Attribution de noms aux PIN
+// Attribution de noms aux PINs
 #define bouton_A 2
 #define bouton_B 3
 #define bouton_C 4  
