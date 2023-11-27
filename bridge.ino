@@ -36,23 +36,23 @@ void loop()
   {
     do // Entre dans la boucle au moins une fois
     {
-      Data = UART.read(); // Lecture d'un bit dans la memoire tampon du software serial
+      Data = UART.read(); // Lecture d'un bit dans la memoire tampon du software serial et le stocke dans une variable
       if(Data == 0x58) // Si égal à X
       {
-        DataX = UART.parseInt(); // Lit le premier entier disponible dans le buffer série
+        DataX = UART.parseInt(); // Lit le premier entier disponible dans le buffer série et le stocke dans une variable
         Serial.print(DataX);     // Affiche l'entier stocké dans DataX (Position Potentiomètre X) dans le moniteur serie
         Serial.println(":X");    // Affiche un X dans le moniteur serie
       }
       Data = UART.read();
       if(Data == 0x59) // Si égal à Y
       {
-        DataY = UART.parseInt(); // Lit le premier entier disponible dans le buffer série
+        DataY = UART.parseInt(); // Lit le premier entier disponible dans le buffer série et le stocke dans une variable
         Serial.print(DataY);     // Affiche l'entier stocké dans DataY (Position Potentiomètre Y) dans le moniteur serie
         Serial.println(":Y");    // Affiche un Y dans le moniteur serie
       }
     }while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
     
-    Data = UART.read();   // Lecture d'un bit dans la memoire tampon du software serial
+    Data = UART.read();   // Lecture d'un bit dans la memoire tampon du software serial et le stocke dans une variable
     if(Data == 0x41)      // Si égal à A
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
