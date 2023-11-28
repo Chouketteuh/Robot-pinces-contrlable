@@ -56,7 +56,7 @@ void loop()
 
         IIC_write_int(DataY);     // Fonction - Envoie une variable (int) dans le BUS IIC
       }
-    }while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
+    } while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
     
     Data = UART.read();   // Lecture d'un bit dans la memoire tampon du software serial et le stocke dans une variable
     
