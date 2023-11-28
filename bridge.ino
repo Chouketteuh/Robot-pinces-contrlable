@@ -47,7 +47,7 @@ void loop()
         Serial.print(DataY);     // Affiche l'entier stocké dans DataY (Position Potentiomètre Y) dans le moniteur serie
         Serial.println(":Y");    // Affiche un Y dans le moniteur serie
       }
-    }while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
+    } while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
     
     Data = UART.read();   // Lecture d'un bit dans la memoire tampon du software serial et le stocke dans une variable
     
