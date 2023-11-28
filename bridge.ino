@@ -2,14 +2,10 @@
 #include <stdio.h>
 /*UART*/
 #include <SoftwareSerial.h>
-/*IIC*/
-#include <Wire.h>
 
 // Attribution de noms aux PINs
 #define RX_PIN 8
 #define TX_PIN 9
-
-#define IIC_CHANNEL 1
 
 // Variables de stockage
 int DataX;
@@ -26,7 +22,6 @@ void setup()
 
   // Demarrage des ports serie + vitesse de transmission
   UART.begin(19200); 
-  Wire.begin(); // Bus IIC (Pas besoin d'adresse pour le maitre)
   Serial.begin(9600);
 
   delay(2000);
@@ -44,8 +39,6 @@ void loop()
         DataX = UART.parseInt(); // Lit le premier entier disponible dans le buffer série et le stocke dans une variable
         Serial.print(DataX);     // Affiche l'entier stocké dans DataX (Position Potentiomètre X) dans le moniteur serie
         Serial.println(":X");    // Affiche un X dans le moniteur serie
-
-        IIC_write_int(DataX);     // Fonction - Envoie une variable (int) dans le BUS IIC
       }
       Data = UART.read();
       if(Data == 0x59) // Si égal à Y
@@ -53,8 +46,6 @@ void loop()
         DataY = UART.parseInt(); // Lit le premier entier disponible dans le buffer série et le stocke dans une variable
         Serial.print(DataY);     // Affiche l'entier stocké dans DataY (Position Potentiomètre Y) dans le moniteur serie
         Serial.println(":Y");    // Affiche un Y dans le moniteur serie
-
-        IIC_write_int(DataY);     // Fonction - Envoie une variable (int) dans le BUS IIC
       }
     }while(Data == 0x58 || Data == 0x59); // Tant que c'est égal à X ou Y
     
@@ -63,58 +54,30 @@ void loop()
     if(Data == 0x41)      // Si égal à A
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-       IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x42) // Si égal à B
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x43) // Si égal à C
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x44) // Si égal à D
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x45) // Si égal à E
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x46) // Si égal à F
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     }
     else if(Data == 0x4A) // Si égal à J
     {
       Serial.println(Data); // Affiche l'entier stocké dans Data (Boutons) dans le moniteur serie
-
-      IIC_write_char(Data); // Fonction - Envoie une variable (char) dans le BUS IIC
     } 
   }
-}
-
-void IIC_write_char(char input) // Envoie une variable (char) dans le BUS IIC
-{
-  Wire.beginTransmission(IIC_CHANNEL); // Debut de la transmission à l'adresse de l'esclave 
-  Wire.write(input); // Envoie des données
-  Wire.endTransmission(); // Fin de la transmission
-}
-
-void IIC_write_int(int input) // Envoie une variable (int) dans le BUS IIC
-{
-  Wire.beginTransmission(IIC_CHANNEL); // Debut de la transmission à l'adresse de l'esclave 
-  Wire.write(input); // Envoie des données
-  Wire.endTransmission(); // Fin de la transmission
 }
